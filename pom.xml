@@ -8,7 +8,6 @@
 	<name>OxentMusic</name>
 	<description>Listagem de musica</description>
 
-
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>

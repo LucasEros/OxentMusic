@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +26,7 @@ public class Usuario {
 	
 	private String senha;
 	
+	@OneToMany(mappedBy = "userId")
 	private List<Musica> musicas = new ArrayList<Musica>();
 
 	public Usuario() {
@@ -32,7 +34,6 @@ public class Usuario {
 	}
 
 	public Usuario(Long id, String nome, String email, String dataNascimento, String senha, List<Musica> musicas) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;

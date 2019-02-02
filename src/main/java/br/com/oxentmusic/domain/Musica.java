@@ -1,17 +1,17 @@
 package br.com.oxentmusic.domain;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "Musicas")
+@Table(name="musicas")
 public class Musica {
 	
 	@Id
@@ -28,18 +28,21 @@ public class Musica {
 	private String genero;
 	
 	@Column(name = "data_atual")
-	private Date atual;
+	private String atual;
+	
+	@ManyToOne
+	@JoinColumn(name = "usuario_id")
+	private Usuario userId;
 	
 	public Musica() {
 		
 	}
 	
-	public Musica(Long id, String nome, String artista, String genero, Date atual) {
-		this.id = id;
+	public Musica(String nome, String artista, String genero, Usuario user) {
 		this.nome = nome;
 		this.artista = artista;
 		this.genero = genero;
-		this.atual = atual;
+		this.userId = user;
 	}
 
 
@@ -76,12 +79,12 @@ public class Musica {
 		this.genero = genero;
 	}
 
-	public Date getAtual() {
+	public String getAtual() {
 		return atual;
 	}
 
-	public void setAtual(Date atual) {
-		this.atual = atual;
+	public void setAtual(String string) {
+		this.atual = string;
 	}
 	
 	

@@ -1,0 +1,9 @@
+br\com\oxentmusic\services\UsuarioService.class
+br\com\oxentmusic\controller\UsuarioController.class
+br\com\oxentmusic\repositories\MusicaRepository.class
+br\com\oxentmusic\domain\Musica.class
+br\com\oxentmusic\repositories\UsuarioRepository.class
+br\com\oxentmusic\controller\MusicaController.class
+br\com\oxentmusic\App.class
+br\com\oxentmusic\services\MusicaService.class
+br\com\oxentmusic\domain\Usuario.class
