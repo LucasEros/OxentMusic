@@ -1,44 +1,42 @@
 package br.com.oxentmusic.dto;
 
+import javax.validation.constraints.NotEmpty;
+
 public class MusicaDTO {
-	
-	private String nome;
-	
-	private String artista;
-	
-	private String genero;
-	
+
+	@NotEmpty(message = "Preenchimento Obrigatorio")
+	private String nomeDaMusica;
+
+	@NotEmpty(message = "Preenchimento Obrigatorio")
+	private String nomeDoCantor;
+
+	@NotEmpty(message = "Preenchimento Obrigatorio")
+	private String generoDaMusica;
+
 	private Long usuarioId;
-	
-	public MusicaDTO(String nome, String artista, String genero, Long usuarioId) {
-		this.nome = nome;
-		this.artista = artista;
-		this.genero = genero;
-		this.usuarioId = usuarioId;
+
+	public String getNomeDaMusica() {
+		return nomeDaMusica;
 	}
 
-	public String getNome() {
-		return nome;
+	public void setNomeDaMusica(String nomeDaMusica) {
+		this.nomeDaMusica = nomeDaMusica;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public String getNomeDoCantor() {
+		return nomeDoCantor;
 	}
 
-	public String getArtista() {
-		return artista;
+	public void setNomeDoCantor(String nomeDoCantor) {
+		this.nomeDoCantor = nomeDoCantor;
 	}
 
-	public void setArtista(String artista) {
-		this.artista = artista;
+	public String getGeneroDaMusica() {
+		return generoDaMusica;
 	}
 
-	public String getGenero() {
-		return genero;
-	}
-
-	public void setGenero(String genero) {
-		this.genero = genero;
+	public void setGeneroDaMusica(String generoDaMusica) {
+		this.generoDaMusica = generoDaMusica;
 	}
 
 	public Long getUsuarioId() {
@@ -48,4 +46,5 @@ public class MusicaDTO {
 	public void setUsuarioId(Long usuarioId) {
 		this.usuarioId = usuarioId;
 	}
+
 }

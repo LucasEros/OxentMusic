@@ -1,6 +1,6 @@
 package br.com.oxentmusic.controller;
 
-import java.util.List;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,13 +24,8 @@ public class UsuarioController {
 	private UsuarioService service;
 	
 	@PostMapping
-	public ResponseEntity<Usuario> insert(@RequestBody UsuarioDTO user) {
+	public ResponseEntity<Usuario> insert(@Valid @RequestBody UsuarioDTO user) {
 		return new ResponseEntity<Usuario>(service.insert(user),HttpStatus.CREATED);
-	}
-	
-	@GetMapping
-	public ResponseEntity<List<Usuario>> readAll(){
-		return new ResponseEntity<List<Usuario>>(service.readAll(),HttpStatus.OK);
 	}
 	
 	@GetMapping("{id}")

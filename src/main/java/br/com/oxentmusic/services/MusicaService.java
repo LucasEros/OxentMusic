@@ -2,7 +2,6 @@ package br.com.oxentmusic.services;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,33 +14,38 @@ import br.com.oxentmusic.services.exception.NotFoundException;
 
 @Service
 public class MusicaService {
-
+	
 	@Autowired
 	private UsuarioService usuarioService;
 
 	@Autowired
 	private MusicaRepository repository;
 
-	public Musica insert(MusicaDTO user) {
-		return repository.save(fromDTO(user));
-	}
-
-	public List<Musica> readAll() {
-		return repository.findAll();
+	public Musica insert(MusicaDTO userobj) {
+		
+		Usuario aux = usuarioService.findOne(userobj.getUsuarioId());
+		Musica music = fromDTO(aux, userobj);
+		aux.getBiblioteca().add(music);
+		aux.setId(userobj.getUsuarioId());
+		
+		usuarioService.update(aux);
+		return repository.save(music);
 	}
 
 	public void update(Musica user) {
 		if (repository.existsById(user.getId())) {
 			repository.save(user);
+		} else {
+			throw new NotFoundException("Musica não Encontrada!!");
 		}
-		throw new NotFoundException("Musica não Encontrada!!");
 	}
 
 	public void delete(Long id) {
-		if (repository.existsById(id)) {
+		if (repository.findById(id).isPresent()) {
 			repository.deleteById(id);
+		} else {
+			throw new NotFoundException("Musica não Encontrada!!");
 		}
-		throw new NotFoundException("Musica não Encontrada!!");
 	}
 
 	private String getData() {
@@ -49,12 +53,9 @@ public class MusicaService {
 		return sdf.format(new Date(System.currentTimeMillis()));
 	}
 
-	private Musica fromDTO(MusicaDTO user) {
-		Usuario aux = usuarioService.findOne(user.getUsuarioId());
-		Musica music = new Musica(user.getNome(), user.getArtista(), user.getGenero(), aux);
-		aux.getMusicas().add(music);
+	private Musica fromDTO(Usuario aux,MusicaDTO user) {
+		Musica music = new Musica(user.getNomeDoCantor(), user.getNomeDaMusica(), user.getGeneroDaMusica(),aux);
 		music.setAtual(getData());
-		usuarioService.update(aux);
 		return music;
 	}
 }
